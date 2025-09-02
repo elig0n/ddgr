@@ -594,7 +594,10 @@ class DdgUrl:
             else:
                 q += keywords
         if sites:
-            q += ' site:' + ','.join(urllib.parse.quote_plus(site) for site in sites)
+            q += ' ('
+            for site in sites:
+                q += ' site:' + urllib.parse.quote_plus(site) + ' OR'
+            q += ' )'
         qd['q'] = q
 
         return qd
